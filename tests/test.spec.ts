@@ -1,6 +1,7 @@
 import {test, expect } from '@playwright/test';
 import { Luxury } from '../src/Main';
 import { USER } from '../data/user-data';
+import { SystemMessages } from '../data/system-messages';
 
 let close = true;
 test.beforeEach(async ({page})=> {
@@ -52,7 +53,7 @@ test.describe('Login test group', ()=>{
         // login in to the app
         await Luxury.Login.Access(USER.locked.user, USER.locked.password);
 
-        expect(await Luxury.Login.ErrorMessage(), 'Error: Locket user messages was not displayed').toBeTruthy();
+        expect(await Luxury.Login.ErrorMessage(), 'Error: Locket user messages was not displayed').toEqual(SystemMessages.locked_error);
 
         // Verify if the Inventory page is visible
         expect(await Luxury.Inventory.IsDisplayed(), 'Inventory page should not be displayed').toBe(false);

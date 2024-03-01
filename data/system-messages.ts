@@ -1,6 +1,6 @@
 
 
-export const loginMessages = {
+export const SystemMessages = {
     "locked_error": "Epic sadface: Sorry, this user has been locked out.",
     "invalid_error": "Epic sadface: Username and password do not match any user in this service"
 }
