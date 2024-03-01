@@ -7,6 +7,10 @@ export class LabelField{
         this._locator = locator;
     }
 
+    /**
+     * 
+     * @returns return the Text content in the label
+     */
     public async GetContent(): Promise<string>{
 
         return await this._locator.innerHTML() ?? '';

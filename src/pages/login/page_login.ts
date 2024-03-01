@@ -39,4 +39,8 @@ export class Login{
     public async IsVisible(): Promise<boolean>{
         return await this._container.isVisible();
     }
+
+    public async ErrorMessage(): Promise<string>{
+        return await this._container.locator('[data-test=error]').innerText();
+    }
 }
