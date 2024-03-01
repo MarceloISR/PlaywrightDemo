@@ -22,7 +22,7 @@ test.afterEach(async ({page})=> {
 })
 
 test.describe('Login test group', ()=>{
-    test('Happy path', {tag: ['@login','@smoke']}, async ({page}) => {
+    test('Happy path', {tag: ['@login','@positive']}, async ({page}) => {
         
         // login in to the app
         await Luxury.Login.Access(USER.standard.user, USER.standard.password);
@@ -41,21 +41,24 @@ test.describe('Login test group', ()=>{
 
         // go back to the Inventory page
         await Luxury.ItemDetail.BackToProduct.Click();
+        // from the Inventory page, sort the items by Name A to Z
+        await Luxury.Inventory.Filter.SelectOption('Price (high to low)');
 
         // Verify if the Inventory page is displayed
         expect(await Luxury.Inventory.IsDisplayed(), 'Error: Inventory page was not displayed').toBeTruthy();
 
-    })
+    });
 
-    test('Bloqued user', {tag: ['@login','@smoke']}, async ({page}) => {
+    test('Bloqued user', {tag: ['@login','@negative']}, async ({page}) => {
         // before each will not be executed
         close = false;
         // login in to the app
         await Luxury.Login.Access(USER.locked.user, USER.locked.password);
 
+        // Verify an error is displayed after trying to login in
         expect(await Luxury.Login.ErrorMessage(), 'Error: Locket user messages was not displayed').toEqual(SystemMessages.locked_error);
 
         // Verify if the Inventory page is visible
         expect(await Luxury.Inventory.IsDisplayed(), 'Inventory page should not be displayed').toBe(false);
-    })
-})
+    });
+});

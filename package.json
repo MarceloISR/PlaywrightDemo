@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "execute": "npx playwright test tests/ --project=chromium --headed"
+    "regression": "npx playwright test tests/ --project=chromium --headed --grep \"@login|@positive\""
   },
   "keywords": [],
   "author": "",
